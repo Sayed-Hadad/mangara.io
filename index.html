@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منجرة | خشب بجودة عالية وتصميم فاخر</title>
+    <title>منجره ومحدده ومفروشات أعمال الجندل</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Lightbox CSS -->
@@ -28,8 +28,8 @@
         <div class="container">
             <div class="logo">
                 <a href="#hero">
-                    <h1>منجرة</h1>
-                    <span>للأعمال الخشبية الفاخرة</span>
+                    <h1>منجرة ومحدده</h1>
+                    <span>اعمال الجندل</span>
                 </a>
             </div>
             <div class="hamburger-menu">
@@ -45,16 +45,24 @@
                 </ul>
             </nav>
         </div>
-    </header>
-
-    <!-- Hero Section -->
+    </header>    <!-- Hero Section -->
     <section id="hero" class="parallax">
         <div class="overlay"></div>
         <div class="hero-content">
-            <h1 class="animate-fadeIn">إبداع يتجسد في الخشب</h1>
+            <div class="hero-logo animate-fadeIn">
+                <img src="images/logo-light.png" alt="" class="logo-img">
+            </div>
+            <h1 class="hero-title animate-slideIn">إبداع يتجسد في <span class="highlight">الخشب</span></h1>
             <p class="animate-fadeIn delay-1">نصنع قطع خشبية فاخرة بحرفية عالية تدوم مدى الحياة</p>
-            <a href="#contact" class="btn animate-fadeIn delay-2">تواصل معنا</a>
+            <div class="hero-buttons animate-fadeIn delay-2">
+                <a href="#contact" class="btn btn-primary">تواصل معنا</a>
+                <a href="#gallery" class="btn btn-outline">معرض الأعمال</a>
+            </div>
+            <div class="hero-scroll-indicator animate-bounce">
+                <a href="#about"><i class="fas fa-chevron-down"></i></a>
+            </div>
         </div>
+        <div class="hero-particles" id="particles-js"></div>
     </section>
 
     <!-- About Us Section -->
@@ -90,10 +98,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services">
+    </section>    <!-- Services Section -->    <section id="services">
         <div class="container">
             <div class="section-header">
                 <h2>خدماتنا</h2>
@@ -102,32 +107,74 @@
             </div>
             <div class="services-grid">
                 <div class="service-card animate-fadeIn">
-                    <div class="service-icon">
-                        <i class="fas fa-couch"></i>
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                    </div>                    <div class="service-content">
+                        <h3>أثاث مخصص</h3>                        <p>تصميم وتصنيع قطع أثاث فريدة ومخصصة تناسب ذوقك ومساحتك وتعكس شخصيتك.</p>
                     </div>
-                    <h3>أثاث مخصص</h3>
-                    <p>تصميم وتصنيع قطع أثاث فريدة ومخصصة تناسب ذوقك ومساحتك وتعكس شخصيتك.</p>
                 </div>
-                <div class="service-card animate-fadeIn delay-1">
-                    <div class="service-icon">
-                        <i class="fas fa-home"></i>
+                <div class="service-card animate-fadeIn">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                    </div>                    <div class="service-content">
+                        <h3>ديكورات خشبية داخلية</h3>                        <p>تصميم وتنفيذ ديكورات خشبية للجدران والأسقف والمساحات الداخلية بلمسة فنية مميزة.</p>
                     </div>
-                    <h3>ديكورات خشبية داخلية</h3>
-                    <p>تصميم وتنفيذ ديكورات خشبية للجدران والأسقف والمساحات الداخلية بلمسة فنية مميزة.</p>
                 </div>
-                <div class="service-card animate-fadeIn delay-2">
-                    <div class="service-icon">
-                        <i class="fas fa-utensils"></i>
+                <div class="service-card animate-fadeIn">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                    </div>                    <div class="service-content">
+                        <h3>مطابخ خشبية</h3>                        <p>تصميم وتصنيع مطابخ خشبية عصرية وعملية بمواصفات عالية الجودة وتفاصيل دقيقة.</p>
                     </div>
-                    <h3>مطابخ خشبية</h3>
-                    <p>تصميم وتصنيع مطابخ خشبية عصرية وعملية بمواصفات عالية الجودة وتفاصيل دقيقة.</p>
                 </div>
-                <div class="service-card animate-fadeIn delay-3">
-                    <div class="service-icon">
-                        <i class="fas fa-door-open"></i>
+                <div class="service-card animate-fadeIn delay-3" data-category="ابواب">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                    </div>                    <div class="service-content">
+                        <h3>أبواب خشبية</h3>                        <p>تصنيع أبواب خشبية بتصاميم كلاسيكية وعصرية من أجود أنواع الخشب مع خيارات متعددة للتشطيب.</p>
                     </div>
-                    <h3>أبواب خشبية</h3>
-                    <p>تصنيع أبواب خشبية بتصاميم كلاسيكية وعصرية من أجود أنواع الخشب مع خيارات متعددة للتشطيب.</p>
+                </div>
+                <div class="service-card animate-fadeIn delay-4" data-category="ابواب">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <i class="fas fa-door-closed"></i>
+                        </div>
+                    </div>                    <div class="service-content">
+                        <h3>أبواب حديد</h3>                        <p>تصميم وتصنيع أبواب حديدية ذات متانة عالية بتصاميم عصرية وضمان الحماية والأمان.</p>
+                    </div>
+                </div>                <div class="service-card animate-fadeIn delay-4" data-category="ابواب">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <i class="fas fa-archway"></i>
+                        </div>
+                    </div>                    <div class="service-content">
+                        <h3>أبواب كلادينج</h3>                        <p>تصميم وتركيب أبواب كلادينج عصرية وأنيقة تناسب الواجهات الحديثة بمختلف التصاميم والألوان.</p>
+                    </div>
+                </div>                <div class="service-card animate-fadeIn delay-4" data-category="ابواب">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <i class="fas fa-door-closed"></i>
+                        </div>
+                    </div>                    <div class="service-content">
+                        <h3>أبواب PVC</h3>                        <p>توريد وتركيب أبواب PVC عالية الجودة مقاومة للماء والرطوبة ومثالية للحمامات والمطابخ.</p>
+                    </div>
+                </div>
+                <div class="service-card animate-fadeIn delay-4" data-category="اثاث">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                    </div>                    <div class="service-content">
+                        <h3>تفصيل كنب وستائر</h3>                        <p>خدمات تفصيل كنب وستائر بجودة عالية ومقاسات مخصصة تناسب ديكور منزلك بتشكيلة واسعة من الأقمشة.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -179,68 +226,60 @@
                 </a>
             </div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
+    </section>    <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <div class="section-header">
                 <h2>تواصل معنا</h2>
                 <span class="separator"></span>
-                <p>يمكنك التواصل معنا لطلب استشارة أو الحصول على عرض سعر</p>
+                <p>يسعدنا استقبال استفساراتكم وطلباتكم على مدار الساعة</p>
             </div>
             <div class="contact-wrapper">
                 <div class="contact-info animate-fadeIn">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>العنوان</h4>
-                            <p>شارع النجارة، المنطقة الصناعية، المدينة</p>
+                    <div class="contact-cards">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>العنوان</h4>
+                                <p>المملكة العربية السعودية - 8837 دومة الجندل – حي 53</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>الهاتف</h4>
+                                <p><a href="tel:+966508336466" class="contact-link">+966 50 833 6466</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>ساعات العمل</h4>
+                                <p>السبت - الخميس: 9 صباحاً - 9 مساءً</p>
+                                <p>الجمعة: 2 ظهراً - 9 مساءً</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>البريد الإلكتروني</h4>
+                                <p><a href="mailto:info@manjarah.com" class="contact-link">info@manjarah.com</a></p>
+                            </div>
+                        </div>
+                    </div>                    <div class="social-media-section animate-fadeIn delay-1">
+                        <h4>تابعونا على منصات التواصل الاجتماعي</h4>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/1FJtCGFFu2/?mibextid=qi2Omg" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/decor_furniture_factory?igsh=MTI1YmoxbmttNjhqaQ%3D%3D" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.snapchat.com/add/aemal_eljandel?share_id=xPt5q9XXgsQ&locale=ar-EG" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-snapchat"></i></a>
+                            <a href="https://www.tiktok.com/@decor_furniture_factory?_t=ZS-8xRZhwDo9qK&_r=1" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://wa.me/+966508336466" class="social-link whatsapp-btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> تواصل عبر واتساب</a>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>الهاتف</h4>
-                            <p>+966 50 833 6466</p>
-                        </div>
+                    <div class="map-container animate-fadeIn delay-2">
+                        <h4>موقعنا على الخريطة</h4>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3462.5838247882934!2d39.86236998712822!3d29.789673266286048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x150d2ee7f69f9f15%3A0xcbfd12ff5b2fb0e6!2zV1REQTg4MzfYjCA4ODM3INiv2YjZhdipINin2YTYrNmG2K_ZhCA1M9iMIDMzMjXYjCDYrdmKINiz2YrZhCDYp9mE2K_ZhNmH2YXZitipLCBEdW1hdCBhbC1KYW5kYWwgNzQ4MjEsIFNhdWRpIEFyYWJpYQ!5e0!3m2!1sen!2seg!4v1750671921176!5m2!1sen!2seg" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>البريد الإلكتروني</h4>
-                            <p>info@manjarah.com</p>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/+966508336466" class="social-link whatsapp-btn"><i class="fab fa-whatsapp"></i> تواصل عبر واتساب</a>
-                    </div>
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9792.591332960523!2d39.79659233285809!3d29.80065405598058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x150d25fe979a116b%3A0x66d87cf2904c8f8d!2s74823%2C%20Saudi%20Arabia!5e0!3m2!1sen!2seg!4v1750548344673!5m2!1sen!2seg" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="contact-form animate-fadeIn delay-1">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">الاسم</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">رقم الهاتف</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">البريد الإلكتروني (اختياري)</label>
-                            <input type="email" id="email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">الرسالة</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">إرسال الرسالة</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -267,6 +306,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

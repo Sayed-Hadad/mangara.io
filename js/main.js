@@ -6,6 +6,122 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector('.preloader').style.visibility = 'hidden';
     }, 1500);
 
+    // Fix Font Awesome icons if needed
+    if (typeof FontAwesome !== 'undefined') {
+        setTimeout(function() {
+            FontAwesome.dom.i2svg();
+        }, 500);
+    }
+
+    // Initialize Particles.js
+    if (document.getElementById('particles-js')) {
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 50,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#c8a97e"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#c8a97e",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    }
+
     // Initialize animations
     const observerOptions = {
         threshold: 0.2,
@@ -139,6 +255,38 @@ document.addEventListener("DOMContentLoaded", function() {
                     behavior: 'smooth'
                 });
             }
+        });
+    });
+
+    // سكريبت تصفية الخدمات
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    // تهيئة أزرار التصفية
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // إزالة الحالة النشطة من جميع الأزرار
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // إضافة الحالة النشطة للزر المضغوط
+            this.classList.add('active');
+
+            const filterValue = this.getAttribute('data-filter');
+
+            // تصفية البطاقات بناءً على الفئة المحددة
+            serviceCards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                    card.style.opacity = '0';
+                    setTimeout(() => {
+                        card.classList.remove('hidden');
+                        card.style.opacity = '1';
+                    }, 300);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => {
+                        card.classList.add('hidden');
+                    }, 300);
+                }
+            });
         });
     });
 });
