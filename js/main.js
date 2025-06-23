@@ -256,37 +256,22 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
         });
-    });
-
-    // سكريبت تصفية الخدمات
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    });    // تأثيرات التمرير في قسم الخدمات
     const serviceCards = document.querySelectorAll('.service-card');
 
-    // تهيئة أزرار التصفية
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // إزالة الحالة النشطة من جميع الأزرار
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // إضافة الحالة النشطة للزر المضغوط
-            this.classList.add('active');
-
-            const filterValue = this.getAttribute('data-filter');
-
-            // تصفية البطاقات بناءً على الفئة المحددة
-            serviceCards.forEach(card => {
-                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                    card.style.opacity = '0';
-                    setTimeout(() => {
-                        card.classList.remove('hidden');
-                        card.style.opacity = '1';
-                    }, 300);
-                } else {
-                    card.style.opacity = '0';
-                    setTimeout(() => {
-                        card.classList.add('hidden');
-                    }, 300);
-                }
-            });
+    // تطبيق تأثيرات التمرير على بطاقات الخدمات
+    const servicesObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('appear');
+                }, index * 100);
+                servicesObserver.unobserve(entry.target);
+            }
         });
+    }, { threshold: 0.2 });
+
+    serviceCards.forEach(card => {
+        servicesObserver.observe(card);
     });
 });

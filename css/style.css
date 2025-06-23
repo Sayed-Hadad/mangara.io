@@ -611,6 +611,30 @@ header.sticky .bar::after {
     margin-bottom: 2rem;
 }
 
+/* Estilos para lista de puntos في About */
+.about-text p {
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.about-text p:first-of-type {
+    margin-bottom: 1.5rem;
+}
+
+.about-text p:not(:first-of-type) {
+    padding-right: 2rem;
+    line-height: 1.8;
+}
+
+.about-text p:not(:first-of-type)::before {
+    content: '•';
+    color: var(--accent-color);
+    font-size: 2rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 .about-features {
     display: flex;
     justify-content: space-between;
@@ -634,7 +658,8 @@ header.sticky .bar::after {
 
 /*=============== SERVICES SECTION ===============*/
 #services {
-    background-color: #f5f0e8;
+    background: linear-gradient(120deg, #f5f0e8 80%, #fffbe6 100%);
+    padding-bottom: 8rem;
 }
 
 .services-filter {
@@ -667,26 +692,61 @@ header.sticky .bar::after {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 48px;
+    padding-bottom: 2rem;
 }
 
 .service-card {
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s ease;
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(200, 169, 126, 0.10), 0 1.5px 8px rgba(139,90,43,0.04);
+    border: 1.5px solid #f3e6d2;
+    background: #fffefb;
+    transition: box-shadow 0.5s, border-color 0.5s, transform 0.5s;
     position: relative;
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(200, 169, 126, 0.1);
+    min-height: 250px;
+    opacity: 0;
+    transform: translateY(30px);
 }
 
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    border-color: rgba(200, 169, 126, 0.3);
+.service-card.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.service-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(200, 169, 126, 0.05) 0%, rgba(139, 90, 43, 0.05) 100%);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.service-card:hover:before {
+    opacity: 1;
+}
+
+.service-card:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    transition: width 0.5s ease;
+}
+
+.service-card:hover:after {
+    width: 100%;
 }
 
 .service-icon-wrapper {
@@ -698,58 +758,112 @@ header.sticky .bar::after {
 }
 
 .service-icon {
-    width: 70px;
-    height: 70px;
-    background: #fff;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #fffbe6 60%, #c8a97e 100%);
+    border: 2.5px solid #f3e6d2;
+    box-shadow: 0 4px 18px rgba(200, 169, 126, 0.13);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
+    font-size: 32px;
     color: #c8a97e;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
 }
 
-.service-icon i, 
+.service-icon i,
 .service-icon svg {
-    font-size: 32px; /* Incrementar tamaño */
+    font-size: 36px;
     opacity: 1;
     visibility: visible;
     display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .service-card:hover .service-icon {
-    background: linear-gradient(135deg, #c8a97e, #b89664);
+    background: linear-gradient(135deg, #c8a97e, #8b5a2b);
     color: #fff;
-    transform: rotateY(180deg);
+    transform: rotateY(360deg) scale(1.1);
+    box-shadow: 0 8px 25px rgba(200, 169, 126, 0.3);
 }
 
 .service-card:hover .service-icon i,
 .service-card:hover .service-icon svg {
-    transform: translate(-50%, -50%) rotateY(-180deg);
     color: #fff;
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .service-content {
-    padding: 20px 25px 30px;
+    padding: 25px 30px 35px;
     text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.service-content:before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.service-card:hover .service-content:before {
+    opacity: 1;
 }
 
 .service-card h3 {
-    margin: 15px 0 10px;
-    font-size: 20px;
-    color: #333;
-    font-weight: 700;
+    margin: 20px 0 15px;
+    font-size: 2.3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.5px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #c8a97e 10%, #8b5a2b 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.service-card:hover h3 {
+    color: var(--primary-color);
+}
+
+.service-card h3:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+    transition: width 0.5s ease;
+}
+
+.service-card:hover h3:after {
+    width: 60px;
 }
 
 .service-card p {
-    color: #666;
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    font-size: 1.18rem;
+    color: #6b5b3e;
+    font-weight: 500;
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+    letter-spacing: 0.1px;
 }
 
 .service-link {
@@ -797,29 +911,16 @@ header.sticky .bar::after {
 
 @media (max-width: 768px) {
     .services-grid {
-        grid-template-columns: 1fr;
-        padding: 0 15px;
+        gap: 24px;
     }
-
-    .service-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 26px;
+    .service-card {
+        border-radius: 14px;
     }
-
-    .service-content {
-        padding: 15px 20px 25px;
+    .service-card h3 {
+        font-size: 1.5rem;
     }
-
-    .filter-btn {
-        padding: 6px 15px;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-
-    .service-card .service-icon i,
-    .service-card .service-icon svg {
-        font-size: 28px;
+    .service-card p {
+        font-size: 1rem;
     }
 }
 
@@ -881,6 +982,40 @@ header.sticky .bar::after {
     color: var(--accent-color);
 }
 
+/* تحسينات قسم معرض الأعمال على الجوالات */
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding: 0 5px;
+  }
+  .gallery-item {
+    height: 220px !important;
+    border-radius: 12px !important;
+  }
+  .gallery-item img {
+    border-radius: 12px !important;
+    object-fit: cover;
+    height: 100% !important;
+  }
+  .gallery-overlay h4 {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.7rem;
+  }
+  .gallery-overlay i {
+    font-size: 2.1rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .gallery-item {
+    height: 150px !important;
+  }
+  .gallery-overlay h4 {
+    font-size: 0.95rem !important;
+  }
+}
+
 /*=============== CONTACT SECTION ===============*/
 #contact {
     background-color: #f5f0e8;
@@ -899,9 +1034,24 @@ header.sticky .bar::after {
 }
 
 .contact-item i {
-    font-size: 2.4rem;
-    color: var(--primary-color);
-    margin-left: 2rem;
+    font-size: 2.7rem;
+    color: #fff;
+    background: linear-gradient(135deg, #c8a97e 60%, #8b5a2b 100%);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 18px;
+    box-shadow: 0 2px 8px rgba(200, 169, 126, 0.18);
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.contact-item:hover i {
+    background: linear-gradient(135deg, #d4af37 80%, #c8a97e 100%);
+    color: #fffbe6;
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.18);
 }
 
 .contact-item h4 {
@@ -1057,6 +1207,13 @@ footer {
     margin-bottom: 0;
 }
 
+.back-to-top {
+    position: fixed;
+    left: 2rem;
+    bottom: 2.5rem;
+    z-index: 1200;
+}
+
 .back-to-top a {
     width: 4rem;
     height: 4rem;
@@ -1067,10 +1224,31 @@ footer {
     justify-content: center;
     align-items: center;
     transition: var(--transition);
+    font-size: 2.2rem;
+    box-shadow: 0 4px 16px rgba(139,90,43,0.10);
 }
 
 .back-to-top a:hover {
     background-color: var(--accent-color);
+}
+
+@media (max-width: 600px) {
+  .back-to-top {
+    left: 1rem;
+    bottom: 1.2rem;
+  }
+  .back-to-top a {
+    width: 3.2rem;
+    height: 3.2rem;
+    font-size: 1.5rem;
+  }
+}
+
+footer .back-to-top {
+    position: static;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
 }
 
 /*=============== ANIMATIONS ===============*/
@@ -1227,4 +1405,52 @@ footer {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color);
+}
+
+/*=============== PAYMENT METHODS SECTION ===============*/
+#payment-methods {
+    background: #f9f5f0;
+    margin-top: 0;
+    border-top: 1.5px solid #f3e6d2;
+}
+.payment-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+.payment-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(200, 169, 126, 0.08);
+    padding: 1.5rem 2.5rem 1.2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 110px;
+    transition: box-shadow 0.3s, transform 0.3s;
+    border: 1.5px solid #f3e6d2;
+}
+.payment-card:hover {
+    box-shadow: 0 6px 24px rgba(200, 169, 126, 0.18);
+    transform: translateY(-6px) scale(1.04);
+    border-color: var(--accent-color);
+}
+.payment-card i {
+    font-size: 3.2rem;
+    color: #2d57f2;
+    margin-bottom: 0.7rem;
+    transition: color 0.3s;
+}
+.payment-card:nth-child(2) i {
+    color: #e25936;
+}
+.payment-card .tabby-icon {
+    width: 48px;
+    height: 32px;
+    object-fit: contain;
+    margin-bottom: 0.7rem;
+    filter: grayscale(0.2);
 }
