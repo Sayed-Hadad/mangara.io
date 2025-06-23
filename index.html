@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منجره ومحدده ومفروشات أعمال الجندل</title>
+    <title>منجرة ومحدده ومفروشات أعمال الجندل</title>
     <meta name="description" content="منجرة ومحددة ومفروشات أعمال الجندل: تنفيذ جميع الأعمال الخشبية والحديدية والمفروشات بجودة عالية وخبرة طويلة في السعودية. تفصيل أثاث، ديكورات، أبواب، مطابخ، كنب وستائر، صيانة وإصلاح.">
     <meta name="keywords" content="نجارة, أعمال خشبية, مفروشات, ديكورات, أبواب, مطابخ, كنب, ستائر, صيانة أثاث, السعودية, الجندل, منجرة, حدادة, تفصيل أثاث, أعمال الجندل">
     <meta name="author" content="منجره ومحدده ومفروشات أعمال الجندل">
@@ -68,10 +68,10 @@
                 <img src="images/logo-light.png" alt="" class="logo-img">
             </div>
             <h1 class="hero-title animate-slideIn">
-            منجره ومحده اعمال الجندل
+            منجرة ومحده اعمال الجندل
             </h1>
             <p class="animate-fadeIn delay-1">
-             في النجارة، الحدادة، والمفروشات
+             لاعمال النجارة، الحدادة، والمفروشات
             </p>
 
             <div class="hero-buttons animate-fadeIn delay-2">
@@ -241,6 +241,27 @@
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
+                <a href="images/gallery6.jpg" data-lightbox="gallery" data-title="غرفة معيشة" class="gallery-item animate-fadeIn delay-5">
+                    <img src="images/gallery6.jpg" alt="غرفة معيشة">
+                    <div class="gallery-overlay">
+                        <h4>غرفة معيشة</h4>
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a href="images/gallery7.jpg" data-lightbox="gallery" data-title="مطبخ خشبي" class="gallery-item animate-fadeIn delay-6">
+                    <img src="images/gallery7.jpg" alt="مطبخ خشبي">
+                    <div class="gallery-overlay">
+                        <h4>مطبخ خشبي</h4>
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a href="images/gallery8.jpg" data-lightbox="gallery" data-title="ديكور حديث" class="gallery-item animate-fadeIn delay-7">
+                    <img src="images/gallery8.jpg" alt="ديكور حديث">
+                    <div class="gallery-overlay">
+                        <h4>ديكور حديث</h4>
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
             </div>
         </div>
     </section>    <!-- Payment Methods Section -->
@@ -358,5 +379,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+// Animation for gallery images on scroll
+function revealGalleryItems() {
+    var items = document.querySelectorAll('.gallery-item');
+    var windowHeight = window.innerHeight;
+    items.forEach(function(item) {
+        var rect = item.getBoundingClientRect();
+        if (rect.top < windowHeight - 60) {
+            item.classList.add('visible');
+        }
+    });
+}
+window.addEventListener('scroll', revealGalleryItems);
+window.addEventListener('DOMContentLoaded', revealGalleryItems);
+</script>
 </body>
 </html>
