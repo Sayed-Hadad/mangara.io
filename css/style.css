@@ -1432,6 +1432,7 @@ footer .back-to-top {
 .payment-icons {
     display: flex;
     justify-content: center;
+    align-items: flex-end;
     gap: 3.5rem;
     flex-wrap: wrap;
     margin-top: 2.5rem;
@@ -1440,28 +1441,38 @@ footer .back-to-top {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    min-width: 120px;
+    min-height: 120px;
+    margin: 0 10px;
+    position: relative;
+}
+.payment-card .icon-holder {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(200, 169, 126, 0.10);
-    padding: 1.2rem 2.2rem 1.1rem 2.2rem;
-    min-width: 100px;
-    min-height: 100px;
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(200, 169, 126, 0.13);
+    margin-bottom: 1.2rem;
     transition: box-shadow 0.3s, transform 0.3s;
 }
 .payment-card i, .payment-card img {
     font-size: 4.2rem !important;
     color: #c8a97e;
-    margin-bottom: 0.5rem;
     height: 4.2rem !important;
     width: 4.2rem !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    margin: 0 auto;
 }
 .payment-card img.tamara-icon, .payment-card img.tabby-icon, .payment-card img.mada-icon {
     height: 4.2rem !important;
     width: auto !important;
-    margin-bottom: 0.5rem;
     filter: drop-shadow(0 2px 6px rgba(200, 169, 126, 0.13));
 }
 .payment-card span {
@@ -1470,8 +1481,11 @@ footer .back-to-top {
     margin-top: 0.2rem;
     letter-spacing: 0.5px;
     font-weight: 600;
+    display: block;
+    text-align: center;
+    margin-bottom: 0;
 }
-.payment-card:hover {
+.payment-card:hover .icon-holder {
     box-shadow: 0 6px 18px rgba(200, 169, 126, 0.18);
     transform: translateY(-4px) scale(1.07);
 }
@@ -1482,7 +1496,10 @@ footer .back-to-top {
     .payment-card {
         min-width: 70px;
         min-height: 70px;
-        padding: 0.7rem 1.1rem 0.7rem 1.1rem;
+    }
+    .payment-card .icon-holder {
+        width: 60px;
+        height: 60px;
     }
     .payment-card i, .payment-card img {
         font-size: 2.7rem !important;
