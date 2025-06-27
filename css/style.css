@@ -958,11 +958,13 @@ header.sticky .bar::after {
     transition: transform 0.5s ease;
     filter: none !important;
     opacity: 1 !important;
+    /* إزالة أي تأثير بلور نهائياً */
 }
 
 .gallery-item.visible img {
     filter: none !important;
     opacity: 1 !important;
+    /* إزالة أي تأثير بلور نهائياً */
 }
 
 .gallery-overlay {
