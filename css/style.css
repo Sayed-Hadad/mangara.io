@@ -930,19 +930,26 @@ header.sticky .bar::after {
 }
 
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .gallery-item {
+    flex: 1 1 320px;
+    max-width: 400px;
+    min-width: 250px;
+    margin: 0 auto;
     position: relative;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 12px;
     height: 25rem;
     opacity: 0;
     transform: translateY(40px) scale(0.96);
     transition: opacity 0.7s cubic-bezier(.4,1.7,.7,1.01), transform 0.7s cubic-bezier(.4,1.7,.7,1.01);
+    box-shadow: 0 4px 18px rgba(200, 169, 126, 0.10);
 }
 
 .gallery-item.visible {
@@ -955,16 +962,16 @@ header.sticky .bar::after {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s cubic-bezier(.4,1.7,.7,1.01);
     filter: none !important;
     opacity: 1 !important;
-    /* إزالة أي تأثير بلور نهائياً */
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(200, 169, 126, 0.08);
 }
 
 .gallery-item.visible img {
     filter: none !important;
     opacity: 1 !important;
-    /* إزالة أي تأثير بلور نهائياً */
 }
 
 .gallery-overlay {
