@@ -2,8 +2,15 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Initialize preloader
     setTimeout(function() {
-        document.querySelector('.preloader').style.opacity = '0';
-        document.querySelector('.preloader').style.visibility = 'hidden';
+        const preloader = document.querySelector('.preloader');
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+        // Remove preloader from DOM after transition
+        setTimeout(function() {
+            if (preloader && preloader.parentNode) {
+                preloader.parentNode.removeChild(preloader);
+            }
+        }, 600); // match CSS transition (0.5s)
     }, 1500);
 
     // Fix Font Awesome icons if needed
@@ -158,6 +165,12 @@ document.addEventListener("DOMContentLoaded", function() {
     hamburger.addEventListener('click', function() {
         hamburger.classList.toggle('active');
         navbar.classList.toggle('active');
+        // Prevent body scroll when menu is open
+        if (navbar.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     });
 
     // Close mobile menu when clicking a nav link
@@ -165,6 +178,7 @@ document.addEventListener("DOMContentLoaded", function() {
         link.addEventListener('click', function() {
             hamburger.classList.remove('active');
             navbar.classList.remove('active');
+            document.body.style.overflow = '';
         });
     });
 
