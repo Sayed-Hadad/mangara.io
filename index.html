@@ -15,7 +15,7 @@
     <meta property="og:url" content="https://www.manjara.online/">
     <link rel="canonical" href="https://www.manjara.online/">
     <!-- Security & SEO Meta Tags -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; img-src 'self' data: https:; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://www.google.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:; frame-src https://www.google.com;">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -28,13 +28,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="shortcut icon" href="images/favicon.ico">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Lightbox CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+
+    <!-- Immediate preloader fallback script -->
+    <script>
+        // Fallback preloader removal - runs immediately
+        setTimeout(function() {
+            const preloader = document.querySelector('.preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                setTimeout(function() {
+                    if (preloader && preloader.parentNode) {
+                        preloader.parentNode.removeChild(preloader);
+                    }
+                }, 500);
+            }
+        }, 2000); // Fallback after 2 seconds
+    </script>
 </head>
 <body>
     <!-- Preloader -->
@@ -68,43 +88,208 @@
                 </ul>
             </nav>
         </div>
-    </header>    <!-- Hero Section -->
-    <section id="hero" class="parallax">
-        <div class="overlay"></div>
-        <div class="hero-content">
-            <div class="hero-logo animate-fadeIn">
-                <img src="images/logo-light.png" alt="" class="logo-img">
+    </header>    <!-- Hero Slider Section -->
+    <section id="hero" class="hero-slider">
+        <!-- Slider Container -->
+        <div class="hero-slider-container">
+            <!-- Slide 1 - Main Intro -->
+            <div class="hero-slide active" data-bg="images/hero.jpg">
+                <div class="hero-background">
+                    <div class="hero-gradient"></div>
+                    <div class="hero-texture"></div>
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="hero-logo" data-aos="fade-down" data-aos-duration="1000">
+                        <img src="images/logo-light.png" alt="شعار أعمال الجندل" class="logo-img">
+                    </div>
+                    <h1 class="hero-title">
+                        أعمال الجندل.. حيث يجتمع <span class="highlight">الفن والجودة</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        منجرة ومحدده ومفروشات - نحول أحلامكم إلى واقع خشبي فاخر
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary pulse-btn">
+                            <i class="fas fa-phone"></i>
+                            تواصل معنا الآن
+                        </a>
+                        <a href="#gallery" class="btn btn-outline">
+                            <i class="fas fa-images"></i>
+                            معرض الأعمال
+                        </a>
+                    </div>
+                </div>
             </div>
-            <h1 class="hero-title animate-slideIn">
-            منجرة ومحدده ومفروشات أعمال الجندل
-            </h1>
-            <p class="animate-fadeIn delay-1">
-             لاعمال النجارة، الحدادة، والمفروشات
-            </p>
 
-            <div class="hero-buttons animate-fadeIn delay-2">
-                <a href="#contact" class="btn btn-primary" aria-label="تواصل معنا">تواصل معنا</a>
-                <a href="#gallery" class="btn btn-outline" aria-label="معرض الأعمال">معرض الأعمال</a>
+            <!-- Slide 2 - Bedroom -->
+            <div class="hero-slide" data-bg="images/gallery1.jpg">
+                <div class="hero-background">
+                    <div class="hero-gradient"></div>
+                    <div class="hero-texture"></div>
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="product-badge">غرف نوم فاخرة</div>
+                    <h1 class="hero-title">
+                        <span class="highlight">غرف نوم</span> تجمع بين الأناقة والراحة
+                    </h1>
+                    <p class="hero-subtitle">
+                        تصميمات عصرية وكلاسيكية تناسب جميع الأذواق بأجود أنواع الخشب
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-bed"></i>
+                            اطلب تصميمك
+                        </a>
+                        <a href="#gallery" class="btn btn-outline">
+                            <i class="fas fa-eye"></i>
+                            شاهد المزيد
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 - Living Room -->
+            <div class="hero-slide" data-bg="images/gallery6.jpg">
+                <div class="hero-background">
+                    <div class="hero-gradient"></div>
+                    <div class="hero-texture"></div>
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="product-badge">غرف معيشة</div>
+                    <h1 class="hero-title">
+                        مساحات <span class="highlight">معيشة مميزة</span> لعائلتك
+                    </h1>
+                    <p class="hero-subtitle">
+                        أثاث غرف المعيشة المصمم خصيصاً ليناسب مساحتك وأسلوب حياتك
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-couch"></i>
+                            احجز استشارة
+                        </a>
+                        <a href="#gallery" class="btn btn-outline">
+                            <i class="fas fa-images"></i>
+                            معرض الأعمال
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 - Kitchen -->
+            <div class="hero-slide" data-bg="images/gallery7.jpg">
+                <div class="hero-background">
+                    <div class="hero-gradient"></div>
+                    <div class="hero-texture"></div>
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="product-badge">مطابخ خشبية</div>
+                    <h1 class="hero-title">
+                        <span class="highlight">مطابخ عملية</span> بلمسة فنية راقية
+                    </h1>
+                    <p class="hero-subtitle">
+                        مطابخ مصممة بعناية لتجمع بين الوظائف العملية والجمال الخشبي الأصيل
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-utensils"></i>
+                            صمم مطبخك
+                        </a>
+                        <a href="#gallery" class="btn btn-outline">
+                            <i class="fas fa-drafting-compass"></i>
+                            أفكار وتصاميم
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 - Doors -->
+            <div class="hero-slide" data-bg="images/gallery5.jpg">
+                <div class="hero-background">
+                    <div class="hero-gradient"></div>
+                    <div class="hero-texture"></div>
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="product-badge">أبواب حديدية</div>
+                    <h1 class="hero-title">
+                        أبواب تجمع بين <span class="highlight">الأمان والجمال</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        أبواب حديدية وخشبية مصنوعة من أجود الخامات لحماية وجمال منزلك
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-door-open"></i>
+                            اطلب قياس
+                        </a>
+                        <a href="#gallery" class="btn btn-outline">
+                            <i class="fas fa-shield-alt"></i>
+                            أنواع الأبواب
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="hero-scroll-indicator animate-bounce">
-            <a href="#about"><i class="fas fa-chevron-down"></i></a>
+
+        <!-- Slider Navigation -->
+        <div class="hero-slider-nav">
+            <button class="slider-btn prev-btn" aria-label="الشريحة السابقة">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="slider-btn next-btn" aria-label="الشريحة التالية">
+                <i class="fas fa-chevron-left"></i>
+            </button>
         </div>
+
+        <!-- Slider Dots -->
+        <div class="hero-slider-dots">
+            <span class="slider-dot active" data-slide="0"></span>
+            <span class="slider-dot" data-slide="1"></span>
+            <span class="slider-dot" data-slide="2"></span>
+            <span class="slider-dot" data-slide="3"></span>
+            <span class="slider-dot" data-slide="4"></span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="hero-slider-progress">
+            <div class="progress-bar"></div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="hero-scroll-indicator">
+            <a href="#about" class="scroll-bounce" aria-label="انتقل للمحتوى">
+                <i class="fas fa-chevron-down"></i>
+                <span class="scroll-text">اكتشف المزيد</span>
+            </a>
+        </div>
+
+        <!-- Particles Background -->
         <div class="hero-particles" id="particles-js"></div>
     </section>
 
     <!-- About Us Section -->
     <section id="about">
         <div class="container">
-            <div class="section-header">
-                <h2>من نحن</h2>
-                <span class="separator"></span>
+            <div class="section-header" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="section-title">
+                    <div class="section-title-wrapper">
+                        <i class="fas fa-hammer section-icon"></i>
+                        <span class="decorative-line left"></span>
+                        <span class="title-text">من نحن</span>
+                        <span class="decorative-line right"></span>
+                        <i class="fas fa-tree section-accent"></i>
+                    </div>
+                </h2>
                 <p>قصة حرفة متوارثة عبر الأجيال</p>
             </div>
             <div class="about-content">
-                <div class="about-image animate-fadeIn">
+                <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
                     <img src="images/about.jpg" alt="صورة عن الشركة" class="img-fluid">
-                </div>                <div class="about-text animate-fadeIn delay-1">
+                </div>                <div class="about-text" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
                     <h3>منجره ومحدده ومفروشات أعمال الجندل</h3>
                     <p>نُقدّم لكم جميع الأعمال الخشبية التي تحتاجون إليها على يد نجّار ماهر ومحترف، فنحن شركة متخصصة تمتلك خبرة واسعة ومهارة عالية في مجال النجارة. ومن أبرز خدماتنا:</p>
                     <p> تفصيل جميع قطع الأثاث الخشبية مثل الطاولات، الدواليب، الأبواب، والديكورات الخشبية بمختلف أنواعها.</p>
@@ -131,12 +316,19 @@
         </div>
     </section>    <!-- Services Section -->    <section id="services">
         <div class="container">
-            <div class="section-header">
-                <h2>خدماتنا</h2>
-                <span class="separator"></span>
+            <div class="section-header" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="section-title">
+                    <div class="section-title-wrapper">
+                        <i class="fas fa-tools section-icon"></i>
+                        <span class="decorative-line left"></span>
+                        <span class="title-text">خدماتنا</span>
+                        <span class="decorative-line right"></span>
+                        <i class="fas fa-tree section-accent"></i>
+                    </div>
+                </h2>
                 <p>نقدم مجموعة متكاملة من الخدمات في مجال النجارة والأعمال الخشبية بجودة عالية وحرفية متميزة</p>
             </div>
-            <div class="services-grid">                <div class="service-card">
+            <div class="services-grid">                <div class="service-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                     <div class="service-icon-wrapper">
                         <div class="service-icon">
                             <i class="fas fa-couch"></i>
@@ -218,70 +410,95 @@
     <!-- Gallery Section -->
     <section id="gallery">
         <div class="container">
-            <div class="section-header">
-                <h2>معرض الأعمال</h2>
-                <span class="separator"></span>
+            <div class="section-header" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="section-title">
+                    <div class="section-title-wrapper">
+                        <i class="fas fa-images section-icon"></i>
+                        <span class="decorative-line left"></span>
+                        <span class="title-text">معرض الأعمال</span>
+                        <span class="decorative-line right"></span>
+                        <i class="fas fa-tree section-accent"></i>
+                    </div>
+                </h2>
                 <p>نماذج من أعمالنا السابقة التي تعكس خبرتنا وحرفيتنا</p>
             </div>
             <div class="gallery-grid">
-                <a href="images/gallery1.jpg" data-lightbox="gallery" data-title="غرفه نوم فاخره" class="gallery-item animate-fadeIn">
-                    <img src="images/gallery1.jpg" alt="غرفه نوم فاخره">
+                <a href="images/gallery1.jpg" data-lightbox="gallery" data-title="غرفه نوم فاخره" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery1.jpg" alt="غرفه نوم فاخره">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>غرفه نوم فاخره</h4>
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a href="images/gallery2.jpg" data-lightbox="gallery" data-title="مجالس ارضي" class="gallery-item animate-fadeIn delay-1">
-                    <img src="images/gallery2.jpg" alt="مجالس ارضي">
+                <a href="images/gallery2.jpg" data-lightbox="gallery" data-title="مجالس ارضي" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery2.jpg" alt="مجالس ارضي">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>مجالس ارضي</h4>
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a href="images/gallery3.jpg" data-lightbox="gallery" data-title="مداخل" class="gallery-item animate-fadeIn delay-2">
-                    <img src="images/gallery3.jpg" alt="مداخل">
+                <a href="images/gallery3.jpg" data-lightbox="gallery" data-title="مداخل" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery3.jpg" alt="مداخل">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>مداخل</h4>
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a href="images/gallery4.jpg" data-lightbox="gallery" data-title="خلفيات شاشه" class="gallery-item animate-fadeIn delay-3">
-                    <img src="images/gallery4.jpg" alt="خلفيات شاشه">
+                <a href="images/gallery4.jpg" data-lightbox="gallery" data-title="خلفيات شاشه" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery4.jpg" alt="خلفيات شاشه">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>خلفيات شاشه</h4>
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a href="images/gallery5.jpg" data-lightbox="gallery" data-title="ابواب حديد" class="gallery-item animate-fadeIn delay-4">
-                    <img src="images/gallery5.jpg" alt="ابواب حديد">
+                <a href="images/gallery5.jpg" data-lightbox="gallery" data-title="ابواب حديد" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery5.jpg" alt="ابواب حديد">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>ابواب حديد</h4>
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a href="images/gallery6.jpg" data-lightbox="gallery" data-title="غرفة معيشة" class="gallery-item animate-fadeIn delay-5">
-                    <img src="images/gallery6.jpg" alt="غرفة معيشة">
+                <a href="images/gallery6.jpg" data-lightbox="gallery" data-title="غرفة معيشة" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="600">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery6.jpg" alt="غرفة معيشة">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>غرفة معيشة</h4>
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a href="images/gallery7.jpg" data-lightbox="gallery" data-title="مطبخ خشبي" class="gallery-item animate-fadeIn delay-6">
-                    <img src="images/gallery7.jpg" alt="مطبخ خشبي">
+                <a href="images/gallery7.jpg" data-lightbox="gallery" data-title="مطبخ خشبي" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="700">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery7.jpg" alt="مطبخ خشبي">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>مطبخ خشبي</h4>
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a href="images/gallery8.jpg" data-lightbox="gallery" data-title="ديكور حديث" class="gallery-item animate-fadeIn delay-7">
-                    <img src="images/gallery8.jpg" alt="ديكور حديث">
+                <a href="images/gallery8.jpg" data-lightbox="gallery" data-title="ديكور حديث" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery8.jpg" alt="ديكور حديث">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>ديكور حديث</h4>
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a href="images/gallery9.jpg" data-lightbox="gallery" data-title="سواتر أحواش" class="gallery-item animate-fadeIn delay-8">
-                    <img src="images/gallery9.png" alt="سواتر أحواش">
+                <a href="images/gallery9.jpg" data-lightbox="gallery" data-title="سواتر أحواش" class="gallery-item zoom-hover" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="900">
+                    <div class="gallery-image-wrapper">
+                        <img src="images/gallery9.png" alt="سواتر أحواش">
+                    </div>
                     <div class="gallery-overlay">
                         <h4>سواتر أحواش</h4>
                         <i class="fas fa-border-style"></i>
@@ -335,9 +552,16 @@
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
-            <div class="section-header">
-                <h2>تواصل معنا</h2>
-                <span class="separator"></span>
+            <div class="section-header" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="section-title">
+                    <div class="section-title-wrapper">
+                        <i class="fas fa-phone section-icon"></i>
+                        <span class="decorative-line left"></span>
+                        <span class="title-text">تواصل معنا</span>
+                        <span class="decorative-line right"></span>
+                        <i class="fas fa-tree section-accent"></i>
+                    </div>
+                </h2>
                 <p>يسعدنا استقبال استفساراتكم وطلباتكم على مدار الساعة</p>
             </div>
             <div class="contact-wrapper">
@@ -394,6 +618,25 @@
             </div>
         </div>
     </section>
+
+    <!-- Floating Social Media Icons -->
+    <div class="floating-social">
+        <a href="https://wa.me/966508336466" class="social-float whatsapp" target="_blank" rel="noopener noreferrer" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/decor_furniture_factory" class="social-float instagram" target="_blank" rel="noopener noreferrer" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.snapchat.com/add/aemal_eljandel" class="social-float snapchat" target="_blank" rel="noopener noreferrer" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
+            <i class="fab fa-snapchat"></i>
+        </a>
+        <a href="https://www.tiktok.com/@decor_furniture_factory" class="social-float tiktok" target="_blank" rel="noopener noreferrer" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="500">
+            <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://www.facebook.com/mnjrh.aljndl" class="social-float facebook" target="_blank" rel="noopener noreferrer" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -477,8 +720,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>
     <script>
+// Initialize AOS
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+});
+
 // Animation for gallery images on scroll
 function revealGalleryItems() {
     var items = document.querySelectorAll('.gallery-item');

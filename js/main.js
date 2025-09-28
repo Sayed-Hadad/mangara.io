@@ -1,28 +1,83 @@
+// Immediate preloader removal fallback
+(function() {
+    const removePreloader = () => {
+        const preloader = document.querySelector('.preloader');
+        if (preloader) {
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+            setTimeout(() => {
+                if (preloader && preloader.parentNode) {
+                    preloader.parentNode.removeChild(preloader);
+                }
+            }, 500);
+        }
+    };
+
+    // Multiple fallbacks
+    setTimeout(removePreloader, 1500);
+
+    // Also try on window load
+    if (typeof window !== 'undefined') {
+        window.addEventListener('load', removePreloader);
+    }
+})();
+
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function() {
-    // Initialize preloader
-    setTimeout(function() {
-        const preloader = document.querySelector('.preloader');
-        preloader.style.opacity = '0';
-        preloader.style.visibility = 'hidden';
-        // Remove preloader from DOM after transition
-        setTimeout(function() {
-            if (preloader && preloader.parentNode) {
-                preloader.parentNode.removeChild(preloader);
-            }
-        }, 600); // match CSS transition (0.5s)
-    }, 1500);
+    // Initialize Hero Slider
+    initializeHeroSlider();
+
+    // Initialize preloader first - independent of other libraries
+    const preloader = document.querySelector('.preloader');
+
+    // Force remove preloader after maximum 3 seconds regardless of other scripts
+    const forceRemovePreloader = () => {
+        if (preloader) {
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+            setTimeout(() => {
+                if (preloader && preloader.parentNode) {
+                    preloader.parentNode.removeChild(preloader);
+                }
+            }, 500);
+        }
+    };
+
+    // Set timeout to remove preloader
+    setTimeout(forceRemovePreloader, 1500);
+
+    // Initialize AOS only if available
+    if (typeof AOS !== 'undefined') {
+        try {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100,
+                easing: 'ease-in-out'
+            });
+        } catch (error) {
+            console.log('AOS initialization failed:', error);
+        }
+    } else {
+        // If AOS is not available, add a fallback
+        console.log('AOS library not loaded, using fallback animations');
+    }
 
     // Fix Font Awesome icons if needed
     if (typeof FontAwesome !== 'undefined') {
-        setTimeout(function() {
-            FontAwesome.dom.i2svg();
-        }, 500);
+        try {
+            setTimeout(function() {
+                FontAwesome.dom.i2svg();
+            }, 500);
+        } catch (error) {
+            console.log('FontAwesome initialization failed:', error);
+        }
     }
 
-    // Initialize Particles.js
-    if (document.getElementById('particles-js')) {
-        particlesJS('particles-js', {
+    // Initialize Particles.js safely
+    if (document.getElementById('particles-js') && typeof particlesJS !== 'undefined') {
+        try {
+            particlesJS('particles-js', {
             "particles": {
                 "number": {
                     "value": 50,
@@ -127,6 +182,11 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             "retina_detect": true
         });
+        } catch (error) {
+            console.log('Particles.js initialization failed:', error);
+        }
+    } else if (document.getElementById('particles-js')) {
+        console.log('Particles.js library not loaded');
     }
 
     // Initialize animations
@@ -148,14 +208,127 @@ document.addEventListener("DOMContentLoaded", function() {
         observer.observe(el);
     });
 
-    // Initialize Sticky Header
+    // Initialize Enhanced Sticky Header with Scroll Direction Detection
     const header = document.getElementById('header');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
+    let lastScrollTop = 0;
+    let isScrollingUp = false;
+
+    function updateStickyHeader() {
+        const scrollTop = window.scrollY;
+        isScrollingUp = scrollTop < lastScrollTop;
+        lastScrollTop = scrollTop;
+
+        if (scrollTop > 100) {
             header.classList.add('sticky');
+            // Add extra enhancement based on scroll direction
+            if (isScrollingUp && scrollTop > 300) {
+                header.style.transform = 'translateY(0)';
+            } else if (!isScrollingUp && scrollTop > 300) {
+                header.style.transform = 'translateY(-100%)';
+            }
         } else {
             header.classList.remove('sticky');
+            header.style.transform = 'translateY(0)';
         }
+    }
+
+    // Throttle scroll events for better performance
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                updateStickyHeader();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    // Enhanced Gallery Animation with Staggered Effects
+    function revealGalleryItems() {
+        const items = document.querySelectorAll('.gallery-item');
+        const windowHeight = window.innerHeight;
+
+        items.forEach((item, index) => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top < windowHeight - 100) {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, index * 150); // Staggered animation
+            }
+        });
+    }
+
+    // Optimized scroll listener for gallery
+    let galleryTicking = false;
+    window.addEventListener('scroll', function() {
+        if (!galleryTicking) {
+            requestAnimationFrame(function() {
+                revealGalleryItems();
+                galleryTicking = false;
+            });
+            galleryTicking = true;
+        }
+    });
+
+    // Initialize gallery animation
+    window.addEventListener('DOMContentLoaded', revealGalleryItems);
+
+    // Enhanced Floating Social Media Icons Animation
+    const socialIcons = document.querySelectorAll('.social-float');
+    socialIcons.forEach((icon, index) => {
+        icon.style.animationDelay = `${index * 0.1}s`;
+        icon.classList.add('animate-slide-in');
+    });
+
+    // Add CSS animation class dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+        .animate-slide-in {
+            animation: slideInRight 0.6s ease-out forwards;
+            transform: translateX(100px);
+            opacity: 0;
+        }
+
+        @keyframes slideInRight {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Enhanced Hero Particles Interaction
+    if (document.getElementById('particles-js') && typeof particlesJS !== 'undefined') {
+        // Add mouse move effect for hero section
+        const hero = document.querySelector('#hero');
+        hero.addEventListener('mousemove', function(e) {
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+
+            const xPercent = (clientX / innerWidth - 0.5) * 2;
+            const yPercent = (clientY / innerHeight - 0.5) * 2;
+
+            const heroContent = document.querySelector('.hero-content');
+            heroContent.style.transform = `translate(${xPercent * 10}px, ${yPercent * 10}px)`;
+        });
+    }
+
+    // Add smooth scroll behavior for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerHeight = header.offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 
     // Mobile Menu Toggle
@@ -270,15 +443,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
         });
-    });    // تأثيرات التمرير في قسم الخدمات
+    });    // Service Cards Animation
     const serviceCards = document.querySelectorAll('.service-card');
 
-    // تطبيق تأثيرات التمرير على بطاقات الخدمات
+    // Apply scroll effects to service cards with enhanced timing
     const servicesObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('appear');
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.opacity = '1';
                 }, index * 100);
                 servicesObserver.unobserve(entry.target);
             }
@@ -286,6 +461,225 @@ document.addEventListener("DOMContentLoaded", function() {
     }, { threshold: 0.2 });
 
     serviceCards.forEach(card => {
+        // Set initial state
+        card.style.transform = 'translateY(30px)';
+        card.style.opacity = '0';
+        card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
         servicesObserver.observe(card);
     });
 });
+
+// Performance optimization: Reduce reflow and repaint
+document.addEventListener('DOMContentLoaded', function() {
+    // Optimize images loading
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        img.loading = 'lazy';
+    });
+
+    // Add will-change property to animated elements
+    const animatedElements = document.querySelectorAll('.hero-content, .floating-social, .gallery-item');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'transform';
+    });
+});
+
+// Hero Slider Functionality
+function initializeHeroSlider() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const progressBar = document.querySelector('.progress-bar');
+
+    let currentSlide = 0;
+    let isAutoPlaying = true;
+    let autoPlayInterval;
+    let progressInterval;
+    const autoPlayDelay = 6000; // 6 seconds per slide
+    const progressUpdateInterval = 10; // Update progress every 10ms
+
+    // Initialize slider
+    function init() {
+        if (slides.length === 0) return;
+
+        showSlide(0);
+        startAutoPlay();
+
+        // Add event listeners
+        if (prevBtn) prevBtn.addEventListener('click', () => {
+            stopAutoPlay();
+            previousSlide();
+            startAutoPlay();
+        });
+
+        if (nextBtn) nextBtn.addEventListener('click', () => {
+            stopAutoPlay();
+            nextSlide();
+            startAutoPlay();
+        });
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopAutoPlay();
+                goToSlide(index);
+                startAutoPlay();
+            });
+        });
+
+        // Pause on hover
+        const heroSection = document.querySelector('#hero');
+        if (heroSection) {
+            heroSection.addEventListener('mouseenter', stopAutoPlay);
+            heroSection.addEventListener('mouseleave', startAutoPlay);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                stopAutoPlay();
+                nextSlide();
+                startAutoPlay();
+            } else if (e.key === 'ArrowRight') {
+                stopAutoPlay();
+                previousSlide();
+                startAutoPlay();
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        if (heroSection) {
+            heroSection.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            heroSection.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                stopAutoPlay();
+                if (diff > 0) {
+                    // Swiped left - next slide
+                    nextSlide();
+                } else {
+                    // Swiped right - previous slide
+                    previousSlide();
+                }
+                startAutoPlay();
+            }
+        }
+    }
+
+    function showSlide(index) {
+        // Update slides
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active', 'prev', 'next');
+            if (i === index) {
+                slide.classList.add('active');
+            } else if (i < index) {
+                slide.classList.add('prev');
+            } else {
+                slide.classList.add('next');
+            }
+        });
+
+        // Update dots
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+
+        // Update background dynamically
+        const activeSlide = slides[index];
+        const bgImage = activeSlide.getAttribute('data-bg');
+        if (bgImage) {
+            const heroTexture = activeSlide.querySelector('.hero-texture');
+            if (heroTexture) {
+                heroTexture.style.backgroundImage = `
+                    radial-gradient(circle at 25% 25%, rgba(139, 90, 43, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 75% 75%, rgba(200, 169, 126, 0.1) 0%, transparent 50%),
+                    url('${bgImage}')
+                `;
+            }
+        }
+
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        goToSlide(next);
+    }
+
+    function previousSlide() {
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        goToSlide(prev);
+    }
+
+    function goToSlide(index) {
+        if (index !== currentSlide) {
+            showSlide(index);
+            resetProgress();
+        }
+    }
+
+    function startAutoPlay() {
+        if (!isAutoPlaying) return;
+
+        stopAutoPlay(); // Clear any existing intervals
+
+        autoPlayInterval = setInterval(nextSlide, autoPlayDelay);
+        startProgressBar();
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
+        }
+        stopProgressBar();
+    }
+
+    function startProgressBar() {
+        if (!progressBar) return;
+
+        let progress = 0;
+        const increment = 100 / (autoPlayDelay / progressUpdateInterval);
+
+        progressInterval = setInterval(() => {
+            progress += increment;
+            if (progress >= 100) {
+                progress = 100;
+                stopProgressBar();
+            }
+            progressBar.style.width = progress + '%';
+        }, progressUpdateInterval);
+    }
+
+    function stopProgressBar() {
+        if (progressInterval) {
+            clearInterval(progressInterval);
+            progressInterval = null;
+        }
+    }
+
+    function resetProgress() {
+        if (progressBar) {
+            progressBar.style.width = '0%';
+        }
+        stopProgressBar();
+    }
+
+    // Initialize the slider
+    init();
+}
